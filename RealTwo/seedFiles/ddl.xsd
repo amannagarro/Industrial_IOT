@@ -1,0 +1,284 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="DDL">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BBB">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="Name"/>
+                            <xs:element type="xs:string" name="IP"/>
+                            <xs:element type="xs:int" name="Port"/>
+                            <xs:element name="ConnectedDevices">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="ConnectedDevice" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:byte" name="DeviceNumber"/>
+                                                    <xs:element type="xs:string" name="Measures"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Devices">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Actuators">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Actuator" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Description">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element type="xs:string" name="Name"/>
+                                                                <xs:element type="xs:string" name="Device_Type"/>
+                                                                <xs:element type="xs:string" name="Verbose_Description"/>
+                                                                <xs:element type="xs:string" name="Vendor"/>
+                                                                <xs:element type="xs:float" name="Version"/>
+                                                                <xs:element name="Physical">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="Dimensions">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element type="xs:byte" name="Length"/>
+                                                                                        <xs:element type="xs:byte" name="Width"/>
+                                                                                        <xs:element type="xs:float" name="Height"/>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Interface">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Signal">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="Operation"/>
+                                                                            <xs:element type="xs:string" name="Type"/>
+                                                                            <xs:element type="xs:string" name="Measurement"/>
+                                                                            <xs:element type="xs:string" name="Unit"/>
+                                                                            <xs:element type="xs:string" name="Number"/>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute type="xs:string" name="id" use="optional"/>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="Reading">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="Type"/>
+                                                                            <xs:element type="xs:byte" name="PinNumber"/>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Sensors">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="DigitalSensor">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Description">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element type="xs:string" name="Name"/>
+                                                                <xs:element type="xs:string" name="Device_Type"/>
+                                                                <xs:element type="xs:string" name="Verbose_Description"/>
+                                                                <xs:element type="xs:string" name="Vendor"/>
+                                                                <xs:element type="xs:float" name="Version"/>
+                                                                <xs:element name="Physical">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="Dimensions">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element type="xs:byte" name="Length"/>
+                                                                                        <xs:element type="xs:byte" name="Width"/>
+                                                                                        <xs:element type="xs:float" name="Height"/>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Interface">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Signal">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="Operation"/>
+                                                                            <xs:element type="xs:string" name="Type"/>
+                                                                            <xs:element type="xs:string" name="Measurement"/>
+                                                                            <xs:element type="xs:string" name="Unit"/>
+                                                                            <xs:element type="xs:string" name="Number"/>
+                                                                            <xs:element name="Range">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element type="xs:byte" name="Min"/>
+                                                                                        <xs:element type="xs:short" name="Max"/>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute type="xs:string" name="id"/>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="Reading">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="Type"/>
+                                                                            <xs:element type="xs:byte" name="PinNumber"/>
+                                                                            <xs:element type="xs:string" name="Measurement"/>
+                                                                            <xs:element type="xs:string" name="Unit"/>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="AnalogSensor">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Description">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element type="xs:string" name="Name"/>
+                                                                <xs:element type="xs:string" name="Device_Type"/>
+                                                                <xs:element type="xs:string" name="Verbose_Description"/>
+                                                                <xs:element type="xs:string" name="Vendor">
+                                                                    <xs:annotation>
+                                                                        <xs:documentation>value updated for table</xs:documentation>
+                                                                    </xs:annotation>
+                                                                </xs:element>
+                                                                <xs:element type="xs:float" name="Version"/>
+                                                                <xs:element name="Physical">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="Dimensions">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element type="xs:byte" name="Length"/>
+                                                                                        <xs:element type="xs:byte" name="Width"/>
+                                                                                        <xs:element type="xs:float" name="Height"/>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element name="Operating_environment">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="Temperature">
+                                                                                            <xs:complexType>
+                                                                                                <xs:sequence>
+                                                                                                    <xs:element name="Range">
+                                                                                                        <xs:complexType>
+                                                                                                            <xs:sequence>
+                                                                                                                <xs:element type="xs:byte" name="Min"/>
+                                                                                                                <xs:element type="xs:short" name="Max"/>
+                                                                                                            </xs:sequence>
+                                                                                                        </xs:complexType>
+                                                                                                    </xs:element>
+                                                                                                </xs:sequence>
+                                                                                            </xs:complexType>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Interface">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Signal">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="Operation"/>
+                                                                            <xs:element type="xs:string" name="Type"/>
+                                                                            <xs:element type="xs:string" name="Measurement"/>
+                                                                            <xs:element type="xs:string" name="Unit"/>
+                                                                            <xs:element type="xs:string" name="Number"/>
+                                                                            <xs:element name="Range">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element type="xs:byte" name="Min"/>
+                                                                                        <xs:element type="xs:short" name="Max"/>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute type="xs:string" name="id"/>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="Reading">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element type="xs:string" name="Type"/>
+                                                                            <xs:element type="xs:string" name="Measurement"/>
+                                                                            <xs:element type="xs:string" name="Unit"/>
+                                                                            <xs:element type="xs:byte" name="ChannelNumber"/>
+                                                                            <xs:element name="Computation">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element type="xs:string" name="Type"/>
+                                                                                        <xs:element type="xs:string" name="Expression"/>
+                                                                                        <xs:element name="Range">
+                                                                                            <xs:complexType>
+                                                                                                <xs:sequence>
+                                                                                                    <xs:element type="xs:string" name="Min"/>
+                                                                                                    <xs:element type="xs:string" name="Max"/>
+                                                                                                </xs:sequence>
+                                                                                            </xs:complexType>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:float" name="version"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

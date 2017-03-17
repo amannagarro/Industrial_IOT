@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+<head >
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link href='/stylesheets/bootstrap.css' rel='stylesheet'/>
+
+</head>
+
+<% include templates/header.ejs %>
+<select class="dropdown"  id="boilerIDselect">
+    <option value="1" selected="selected" >Boiler1</option>
+    <option value="2">Boiler2</option>
+
+</select>
+
+<body>
+<div>
+    <br><br><br>
+    <div id = "leds">
+        <label style=" color: gray; font-size: medium; ">Click to Turn On !! </label>
+        <input type="button" style="background-color: #0480be; color: white;height:30px; width:120px;" id="postLedRed" value="Led Red" />
+        <input type="button" style="background-color: #0480be; color: white;height:30px; width:120px;" id="postLedBlue" value="Led Blue" />
+        <input type="button" style="background-color: #0480be; color: white;height:30px; width:120px;" id="postLedGreen" value="Led Green" />
+    </div>
+    <div id ="Sensors">
+    <label style=" color: gray; font-size: medium; ">Temperature is: </label>
+    <input type="text" id="tempID"/>
+        <div class="divider"></div>
+    <input type="button" style="background-color: #0480be; color: white;height:30px; width:120px;" id="getTempBtn" value="Get Temperature" />
+    <br><br><br>
+        <label style=" color: gray; font-size: medium; " >Proximity is: </label>
+        <input type="text" id="proximityID" />
+        <div class="divider"></div>
+    <input type="button" style="background-color: #0480be; color: white;height:30px; width:120px;"  id="getProximityBtn" class="" value="Sense Proximity"/>
+    </div>
+    <div>
+        <br><br><br>
+        <label style=" color: gray; font-size: medium; " >Total energy consumed:</label>
+        <input type="text" id="conveyerID"/>
+        <div class="divider"></div>
+        <input type="button" style="background-color: #0480be; color: white;height:30px; width:120px;"  id="getConveyerBtn" class="" value="Get Energy"/>
+        <br><br><br>
+    <label style=" color: gray; font-size: medium; ">Click to see graph</label>
+    <input type="button" style="background-color: #0480be; color: white;height:30px; width:120px;"  id="getTempRangeBtn" value="Get Graph"/>
+    <br>
+    <canvas id="myChart"  class="child" width="50" height="50" style="visibility:hidden"></canvas>
+    </div>
+</div>
+
+</body>
+
+<script>
+    jQuery(document).ready(function () {
+        $(function () {
+            setVisibility(); //this calls it on load
+            $("boilerIDselect").change(yourFunction);
+        });
+
+        $("#boilerIDselect").change(setVisibility);
+
+        function setVisibility(){
+
+            var e = document.getElementById('boilerIDselect');
+            var selectedValue = e.options[e.selectedIndex].value;
+            if(selectedValue=="1"){
+                $('#Sensors').show();
+                $('#leds').hide();
+            }
+            if(selectedValue=="2"){
+                $('#Sensors').hide();
+                $('#leds').show();
+            }
+        }
+
+        jQuery("#postLedGreen").click(function () {
+
+            $.get('room1/postLedGreen', {data: $('#boilerIDselect :selected').text()}, function (data) {
+                $(this).css('background-color','green');
+            });
+        });
+        jQuery("#postLedRed").click(function () {
+
+            $.get('room1/postLedRed', {data: $('#boilerIDselect :selected').text()}, function (data) {
+                $(this).css('background-color','red');
+
+            });
+        });
+
+        jQuery("#postLedBlue").click(function () {
+            $.get('room1/postLedBlue', {data: $('#boilerIDselect :selected').text()}, function (data) {
+                $(this).css('background-color','blue');
+            });
+        });
+
+        jQuery("#getTempRangeBtn").click(function () {
+            $.get('room1/getTempGraph', {data:  $('#boilerIDselect :selected').text()}, function (data) {
+           //$.get('room1/getTempRange', {data: "boiler1"}, function (data) {
+                createChart(data.temperatureRangeValue);
+            });
+        });
+        jQuery("#getProximityBtn").click(function () {
+            $.get('room1/getProximity', {data: $('#boilerIDselect :selected').text()}, function (data) {
+                $('#proximityID').val(data.ProximityValue);
+            });
+        });
+        jQuery("#getTempBtn").click(function () {
+            $.get('room1/getTemp', {data:  $('#boilerIDselect :selected').text()}, function (data) {
+            //$.get('room1/getTemp', {data: "boiler1"}, function (data) {
+                $('#tempID').val(data.temperatureValue);
+            });
+        });
+        jQuery("#getConveyerBtn").click(function () {
+           $.get('room1/getConveyorData', {data:  $('#boilerIDselect :selected').text()}, function (data) {
+             //  $.get('room1/getEnergyConsumption', {data: "boiler1"}, function (data) {
+                $('#conveyerID').val(data.EnergyConsumption);
+            });
+        });
+
+        jQuery(".datepicker").datepicker();
+
+        function createChart(graphData) {
+
+            var ctx = document.getElementById("myChart");
+
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["Time1", "Time2", "Time3", "Time4", "Time5", "Time6", "Time7"],
+                    datasets: [{
+                        label: 'Temperature trends',
+                        data: graphData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        fillColor: '#382765',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            $('#myChart').css("height", "400");
+            $('#myChart').css("visibility", "visible");
+        }
+    }());
+</script>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "realtwo",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "chokidar": "^1.6.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.5.2",
+    "express": "~4.14.0",
+    "ip": "^1.1.4",
+    "mongodb": "^2.2.11",
+    "mongoose": "^4.7.0",
+    "morgan": "~1.7.0",
+    "path": "^0.12.7",
+    "serve-favicon": "~2.3.0",
+    "xml2js": "^0.4.17"
+  }
+}
